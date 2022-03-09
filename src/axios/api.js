@@ -55,3 +55,9 @@ export const Searchfuzzy = params => {
 export const Searchhotwords = params => {
     return axios.get('/api/book/search-hotwords', {params: params}).then(res => res.data);
 };
+  /**
+   * @summary 语音阅读
+   * @param {String} - txt 文本内容
+   * @param {String} - per 男声 | 女声 （1-6）  
+   */
+export const audioReading = params => axios.get('https://api.vvhan.com/api/song',{params})

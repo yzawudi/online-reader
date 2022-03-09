@@ -1,35 +1,66 @@
 <template>
-    <div class="content chapter">
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumbs">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/bookinfo/' + bookId }">{{bookTitle}}</el-breadcrumb-item>
-            <el-breadcrumb-item>{{bookData.title}}</el-breadcrumb-item>
-        </el-breadcrumb>
-        <el-button-group class="float-right">
-            <el-button type="primary" icon="el-icon-arrow-left" size="small" @click="backChapter()">上一章</el-button>
-            <el-button type="primary" icon="el-icon-tickets" size="small" @click="backBookinfo()">章节列表</el-button>
-            <el-button type="primary" size="small" @click="nextChapter()">下一章<i
-                class="el-icon-arrow-right el-icon--right"></i></el-button>
-        </el-button-group>
-        <p class="clear-both bb">{{bookData.title}}</p>
-        <pre v-if="imagesData.length == 0">
-            {{bookData.cpContent || bookData.body}}
-        </pre>
-        <div v-if="imagesData.length > 0">
-            <p v-for="item in imagesData">
-                <img :src="item" width="100%">
-            </p>
-        </div>
-        <el-button type="primary" icon="el-icon-arrow-left" size="small" @click="backChapter()">上一章</el-button>
-        <el-button type="primary" class="float-right" size="small" @click="nextChapter()">下一章<i
-            class="el-icon-arrow-right el-icon--right"></i></el-button>
+  <div class="content chapter">
+    <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumbs">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/bookinfo/' + bookId }">{{
+        bookTitle
+      }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ bookData.title }}</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-button-group class="float-right">
+      <el-button
+        type="primary"
+        icon="el-icon-arrow-left"
+        size="small"
+        @click="backChapter()"
+        >上一章</el-button
+      >
+      <el-button
+        type="primary"
+        icon="el-icon-tickets"
+        size="small"
+        @click="backBookinfo()"
+        >章节列表</el-button
+      >
+      <el-button type="primary" size="small" @click="nextChapter()"
+        >下一章<i class="el-icon-arrow-right el-icon--right"></i
+      ></el-button>
+    </el-button-group>
+    <p class="clear-both bb">{{ bookData.title }}</p>
+    <pre v-if="imagesData.length == 0">
+            {{ bookData.cpContent || bookData.body }}
+        </pre
+    >
+    <div v-if="imagesData.length > 0">
+      <p v-for="item in imagesData">
+        <img :src="item" width="100%" />
+      </p>
     </div>
+    <el-button
+      type="primary"
+      icon="el-icon-arrow-left"
+      size="small"
+      @click="backChapter()"
+      >上一章</el-button
+    >
+    <el-button
+      type="primary"
+      class="float-right"
+      size="small"
+      @click="nextChapter()"
+      >下一章<i class="el-icon-arrow-right el-icon--right"></i
+    ></el-button>
+    <audio-reading :cpContent="bookData.cpContent" />
+  </div>
 </template>
 <script>
     import {Bookchapter, Bookcatalog} from "../../axios/api"
     import {mapMutations} from "vuex"
-
+    import AudioReading from '../audioReading/index.vue';
     export default {
+        components: {
+          AudioReading
+        },
         data() {
             return {
                 bookId: "",
@@ -167,20 +198,20 @@
 </script>
 
 <style scoped>
-    .chapter {
-        text-align: left;
-        color: #755927;
-        padding: 10px 10px 20px;
-        line-height: 32px;
-        background-color: #e9e6d0;
-    }
+.chapter {
+  text-align: left;
+  color: #755927;
+  padding: 10px 10px 20px;
+  line-height: 32px;
+  background-color: #e9e6d0;
+}
 
-    .chapter pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
+.chapter pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
-    .breadcrumbs {
-        padding: 8px 0px;
-    }
+.breadcrumbs {
+  padding: 8px 0px;
+}
 </style>
